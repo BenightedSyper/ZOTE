@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-
-//[RequireComponent(typeof(EntityMovement))]
 [RequireComponent(typeof(CharacterController))]
 public class PlayerControl : MonoBehaviour {
 	
@@ -46,9 +44,7 @@ public class PlayerControl : MonoBehaviour {
 	private bool DisplayInventory { get; set; }
 	private bool DisplayEquipment { get; set; }
 	
-	// Use this for initialization
 	void Start () {
-		//myEntityMovement = transform.GetComponent<EntityMovement>();
 		cc = transform.GetComponent<CharacterController>();
 		character = new Character(200, 300, 400, 500);
 		Debug.Log("Shield:" + character.Shield.Current);
@@ -57,7 +53,6 @@ public class PlayerControl : MonoBehaviour {
 		DisplayInventory = false;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Space)){
 			character.TakeDamage(50f, 50f);
@@ -83,23 +78,7 @@ public class PlayerControl : MonoBehaviour {
 		inputVec.x = Input.GetAxisRaw("Horizontal");
 		inputVec.y = Input.GetAxisRaw("Vertical");
 		
-		//jump
-		/*
-		if(Input.GetKeyDown(KeyCode.Space) && !jumping){
-			
-			currentVelocity.y += jumpHeight;
-			jumping = true;
-			myEntityMovement.vertStop = false;
-			myEntityMovement.isGrounded = false;
-		}
-		if(Input.GetKeyUp(KeyCode.Space) && jumping){
-			if(currentVelocity.y > airArc){
-				currentVelocity.y = airArc;
-			}
-		}
-		*/
 		Accelerate(inputVec);
-		//myEntityMovement.MoveEntity(currentVelocity);
 		cc.Move(currentVelocity);
 	}
 	
@@ -111,16 +90,13 @@ public class PlayerControl : MonoBehaviour {
 		if(_inputVec.x != 0){
 			dirX = Mathf.Sign(_inputVec.x);
 		}
-
-		
 		
 		for(int j = 0; j < rayHeightDivisions; j++){
-			ray = new Ray(new Vector3(midWidth + (dirX * cc.radius), midHeight - (cc.height / 2) + ( (cc.height * 9 /10) /(rayHeightDivisions - 1)* j),  0),new Vector3(dirX,0,0));
+			ray = new Ray(new Vector3(midWidth + (dirX * cc.radius), midHeight - (cc.height / 2),  0), new Vector3(dirX,0,0));
 			Debug.DrawRay(ray.origin,ray.direction.normalized * (Mathf.Abs(_inputVec.x) * baseRayDist  + 1), Color.red);
 			if(Physics.Raycast(ray, out hit, Mathf.Abs(_inputVec.x) * baseRayDist + 1, collisionMask)){
 				dist = Vector3.Distance(ray.origin, hit.point);
 				if(dist < skin){
-					//_inputVec.x = 0;
 					horzStop = true;
 					break;
 				}
@@ -131,49 +107,19 @@ public class PlayerControl : MonoBehaviour {
 				}
 			}
 		}
-		/*
-		if(myEntityMovement.vertStop){
-			currentVelocity.y = 0;
-		}
-		*/
 		if(horzStop){
 			currentVelocity.x = 0;
+		}else{
+			currentVelocity.x += (inputVec.x != 0)? inputVec.x * topAccelerationVec.x * Time.deltaTime: -1 * currentVelocity.x * dragX * Time.deltaTime;
 		}
-		/*
-		if(myEntityMovement.isGrounded){
-			jumping = false;
-		}
-		*/
 		if(cc.isGrounded){
 			currentVelocity.y = 0;
-		}
-		currentVelocity.x += (inputVec.x != 0)? inputVec.x * topAccelerationVec.x * Time.deltaTime: -1 * currentVelocity.x * dragX * Time.deltaTime;
-		
-		//currentVelocity.y += (inputVec.y != 0)? inputVec.y * topAccelerationVec.y * Time.deltaTime: -1 * currentVelocity.y * dragY * Time.deltaTime;
-		//no longer player controlled, aside from the jumping
-		//add gravity
-		currentVelocity.y -= gravity * Time.deltaTime;
-		
-		//if(jumping){
-		//	currentVelocity.y += topAccelerationVec.y * Time.deltaTime;
-		//}
-		/*
-		if(Mathf.Abs(currentVelocity.x) < velocitySnap){
-			currentVelocity.x = 0;
 		}else{
-			if(Mathf.Abs(currentVelocity.x) > topVelocityVec.x){
-				currentVelocity.x = topVelocityVec.x * Mathf.Sign(currentVelocity.x);
-			}
+			//add gravity
+			currentVelocity.y -= gravity * Time.deltaTime;
 		}
-		if(Mathf.Abs(currentVelocity.y) < velocitySnap){
-			currentVelocity.y = 0;
-		}else{
-			if(Mathf.Abs(currentVelocity.y) > topVelocityVec.y){
-				//currentVelocity.y = topVelocityVec.y * Mathf.Sign(currentVelocity.y);
-			}
-		}
-		*/
 	}
+	//Inventory stuff
 	public Rect inventoryWindowRect = new Rect(20, 20, 200, 300);
 	public Rect equipmentWindowRect = new Rect(20, 20, 200, 300);
 	public Rect headSlotRect = new Rect(75, 30, 50, 50);
@@ -193,7 +139,6 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 	private void InventoryWindow(int windowID) {
-        //GUI.Button(new Rect(10, 20, 100, 20), "Can't drag me");
 		float buttonWidth = (inventoryWindowRect.width - (2 * sideBuffer)) / inventoryCols;
 		float buttonHeight = (inventoryWindowRect.height - (topBuffer * 2)) / inventoryRows;
 		for(int i = 0; i < inventoryRows; i++){
@@ -208,7 +153,6 @@ public class PlayerControl : MonoBehaviour {
         GUI.DragWindow();
     }
 	private void EquipmentWindow(int windowID) {
-        //GUI.Button(new Rect(10, 20, 100, 20), "Can't drag me");
 		
 		if(GUI.Button(headSlotRect, new GUIContent("Head", character.HeadArmor.GetToolTip()))){
 			character.UnequipHead();
