@@ -47,15 +47,15 @@ public class Armor : Item {
 				 float _heatRating, float _heatDispersion, 
 				 ARMORTYPE _armorType)
 				 : base ( _name, _value, _weight, _itemType){
-		Hull = 0f;
-		HullRegen = 0f; 
-		Shield = 0f; 
-        	ShieldRegen = 0f; 
-		ShieldRegenTimer = 0f;
-        	Energy = 0f;
-        	EnergyRegen = 0f; 
-        	HeatRating = 0f;
-        	HeatDispersion = 0f;
+		Hull = _hull;
+		HullRegen = _hullRegen; 
+		Shield = _shield; 
+        	ShieldRegen = _shieldRegen; 
+		ShieldRegenTimer = _shieldRegenTimer;
+        	Energy = _energy;
+        	EnergyRegen = _energyRegen; 
+        	HeatRating = _heatRating;
+        	HeatDispersion = _heatDispersion;
 		ArmorType = _armorType;
 	}
 }
