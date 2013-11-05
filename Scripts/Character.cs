@@ -78,24 +78,23 @@ public class Character{
 	public void EquipItem(Item _item){
 		switch(_item.ItemType){
 			case ITEMTYPE.ARMOR:
-				EquipArmor(_item);
+				EquipArmor(_item as Armor);
 				break;
 			case ITEMTYPE.WEAPON:
-				EquipWeapon(_item);
+				EquipWeapon(_item as Weapon);
 				break;
 		}
 	}
-	public void EquipArmor(Item _item){
-		Armor armor = _item as Armor;
-		switch(armor.ArmorType){
+	public void EquipArmor(Armor _armor){
+		switch(_armor.ArmorType){
 		case ARMORTYPE.HEAD:
-			EquipHead(armor);
+			EquipHead(_armor);
 			break;
 		case ARMORTYPE.TORSO:
-			EquipTorso(armor);
+			EquipTorso(_armor);
 			break;
 		case ARMORTYPE.LEGS:
-			EquipLegs(armor);
+			EquipLegs(_armor);
 			break;
 		}
 	}
@@ -267,19 +266,18 @@ public class Character{
 		Heat.RemoveFlatMod("ArmorSlot:Legs");
 		Heat.RemoveRegenMod("ArmorSlot:Legs");
 	}
-	public void EquipWeapon(Item _item){
-		Weapon weapon = _item as Weapon;
+	public void EquipWeapon(Weapon _weapon){
 		if(LeftWeapon != null){
 			//unequip old weapon
 			//move to TempHolding
 			TempHolding = LeftWeapon;
 			//remove old stats
-			/******/
+			RemoveWeaponStats();
 		}
 		//equip new weapon
-		LeftWeapon = weapon;
+		LeftWeapon = _weapon;
 		//add new stats
-		/********/
+		AddWeaponStats(_weapon);
 		if(TempHolding != null){
 			//put old weapon in inventory
 			if(PickUp(TempHolding)){
@@ -296,11 +294,17 @@ public class Character{
 		//move to TempHolding
 		TempHolding = LeftWeapon;
 		//remove old stats
-		/******/
+		RemoveWeaponStats();
 		//put old weapon in inventory
 		if(PickUp(TempHolding)){
 			DropItem(TempHolding);
 		}
 		TempHolding = null;
+	}
+	private RemoveWeaponStats(){
+		
+	}
+	private AddWeaponStats(Weapon _weapon){
+		
 	}
 }
