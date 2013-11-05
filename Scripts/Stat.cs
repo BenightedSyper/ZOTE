@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Stat{
+	private static float RegenTimeBase = 5f;
 	public float Current { get; set; }
 	public float Base { get; set; }
 	public float Total { get; set; }
@@ -148,7 +149,7 @@ public class Stat{
 		RegenMods = new Dictionary<string, float>();
 		RegenTimerMods = new Dictionary<string, float>();
 		Base = 100f;
-		RegenTimer = 5;
+		RegenTimer = RegenTimeBase;
 		CalculateTotal();
 		Full();
 	}
@@ -158,7 +159,7 @@ public class Stat{
 		RegenMods = new Dictionary<string, float>();
 		RegenTimerMods = new Dictionary<string, float>();
 		Base = _base;
-		RegenTimer = 5;
+		RegenTimer = RegenTimeBase;
 		CalculateTotal();
 		Full();
 		
