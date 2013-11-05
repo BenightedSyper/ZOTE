@@ -20,24 +20,24 @@ public class Armor : Item {
 		Hull = 0f;
 		HullRegen = 0f; 
 		Shield = 0f; 
-        ShieldRegen = 0f; 
+        	ShieldRegen = 0f; 
 		ShieldRegenTimer = 0f;
-        Energy = 0f;
-        EnergyRegen = 0f; 
-        HeatRating = 0f;
-        HeatDispersion = 0f;
+        	Energy = 0f;
+		EnergyRegen = 0f; 
+        	HeatRating = 0f;
+        	HeatDispersion = 0f;
 		ArmorType = ARMORTYPE.HEAD;
 	}
 	public Armor(string _name, ITEMTYPE _itemType) : base( _name, _itemType){
 		Hull = 0f;
 		HullRegen = 0f; 
 		Shield = 0f; 
-        ShieldRegen = 0f; 
+        	ShieldRegen = 0f; 
 		ShieldRegenTimer = 0f;
-        Energy = 0f;
-        EnergyRegen = 0f; 
-        HeatRating = 0f;
-        HeatDispersion = 0f;
+        	Energy = 0f;
+        	EnergyRegen = 0f; 
+        	HeatRating = 0f;
+        	HeatDispersion = 0f;
 		ArmorType = ARMORTYPE.HEAD;
 	}
 	public Armor(string _name, int _value, int _weight, ITEMTYPE _itemType,
@@ -50,12 +50,12 @@ public class Armor : Item {
 		Hull = 0f;
 		HullRegen = 0f; 
 		Shield = 0f; 
-        ShieldRegen = 0f; 
+        	ShieldRegen = 0f; 
 		ShieldRegenTimer = 0f;
-        Energy = 0f;
-        EnergyRegen = 0f; 
-        HeatRating = 0f;
-        HeatDispersion = 0f;
+        	Energy = 0f;
+        	EnergyRegen = 0f; 
+        	HeatRating = 0f;
+        	HeatDispersion = 0f;
 		ArmorType = _armorType;
 	}
 }
