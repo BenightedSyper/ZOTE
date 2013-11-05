@@ -1,4 +1,4 @@
-using System;
+using UnityEngine;
 
 public enum ITEMTYPE { ITEM = 0, WEAPON = 1, ARMOR = 2, SHIELD = 3, CONSUMABLE = 4 }
 public class Item {	
