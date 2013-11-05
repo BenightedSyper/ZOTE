@@ -34,16 +34,16 @@ public static class ItemGenerator {
 		//randomly choose weapon or armor. 1:3 weapon:armor
 		if((Random.Range(0,4) > 0)){//random [0-4)
 			//HEAD TORSO LEGS
-			return RandomArmor();
+			return RandomArmor() as Armor;
 		}else{
 			// WEAPON
-			return RandomWeapon();
+			return RandomWeapon() as Weapon;
 		}
 		/************************/
 		//shield to be a 3rd item type for the right hand slot
 		/************************/
 	}
-	public static Item RandomWeapon(){
+	public static Weapon RandomWeapon(){
 		Weapon randomWeapon = new Weapon("Random Weapon", ITEMTYPE.WEAPON);
 		//random between weapon speeds
 		float min, max;
@@ -81,7 +81,7 @@ public static class ItemGenerator {
 		}
 		return randomWeapon;
 	}
-	public static Item RandomArmor(){
+	public static Armor RandomArmor(){
 		Armor randomArmor = new Armor("Random Weapon", ITEMTYPE.ARMOR);
 		Debug.Log("" + randomArmor.Name + " : " + randomArmor.Hull);
 		//random between armor types
@@ -97,7 +97,7 @@ public static class ItemGenerator {
 			break;
 		}
 		Debug.Log("" + randomArmor.Name + " : " + randomArmor.Hull);
-		return randomArmor as Item;
+		return randomArmor;
 	}
 	public static Armor RandomHeadArmor(Armor _armor){
 		switch(Random.Range(0,3)){
