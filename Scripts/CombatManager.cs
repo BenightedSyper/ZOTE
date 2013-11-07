@@ -4,12 +4,27 @@ using System.Collections.Generic;
 
 public class CombatManager {
 	
-	CharacterStatScript parent;
+	private CombatManager instance;
 	
-	public CombatManager(CharacterStatScript _parent){
-		parent = _parent;
+	public CombatManager(){
 	}
 	
+	public static CombatManager Instance {
+		get {
+			if (instance == null) {
+				instance = new CombatManager();
+			}
+			return instance;
+		}
+	}
+	
+	public void Evaluate(GameObject _target, IList<Act> _acts){
+		//resolve an action
+		foreach(Act _act in _acts){
+			
+		}
+	}
+	/*
 	public void EvaluateActions(IList<Act> _acts){
 		foreach(Act _act in _acts){
 			EvaluateAct(_act);
@@ -18,29 +33,11 @@ public class CombatManager {
 	void EvaluateAct(Act _act){
 		Debug.Log("" + _act.name);
 		switch(_act.name){
-		case "AlterFatigue":
-			//fatigue damage to caster
-			parent.fatigue.AlterStatCurrent((int)_act.paramList[0]);
-			break;
-		case "AlterFocus":
-			//focus damage to caster
-			parent.focus.AlterStatCurrent((int)_act.paramList[0]);
-			break;
-		case "AlterHealth":
-			//health damage to caster
-			parent.health.AlterStatCurrent((int)_act.paramList[0]);
-			break;
-		case "ConditionalSelfHealthGreaterThanPercent":
-			if((float)parent.health.StatCurrent/(float)parent.health.StatModed > (float) _act.paramList[0]){
-				EvaluateAct((Act)_act.actList[0]);
-			}else{
-				EvaluateAct((Act)_act.actList[1]);
-			}
-			break;
 		default:
 			break;
 		}
 	}
+	*/
 }
 
 
@@ -54,13 +51,15 @@ public class Action {
 		onCastAct = new List<Act>();
 	}
 	
-	public void OnHit(){
+	public void OnHit(/* trarget */ Character _target){
+		CombatManager.Instance.Evaluate(_target, onHitAct);
 	}
 	
 	public void AddOnHit(Act _act){
 		onHitAct.Add(_act);
 	}
-	public void OnCast(){
+	public void OnCast(/* target */ Character _self){
+		CombatManager.Instance.Evaluate(_self, onCastAct);
 	}
 	
 	public void AddOnCast(Act _act){
