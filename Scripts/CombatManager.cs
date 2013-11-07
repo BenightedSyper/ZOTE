@@ -79,3 +79,5 @@ public struct Act{
 		actList = _actList;
 	}
 }
+public static Act TestingAct = new Act("Damage", new ArrayList(new[] {100, 333}), new ArrayList(new[] {}));
+
