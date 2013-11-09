@@ -81,3 +81,9 @@ public struct Act{
 }
 public static Act TestingAct = new Act("Damage", new ArrayList(new[] {100, 333}), new ArrayList(new[] {}));
 
+/*
+player activates ability
+ability evaluates OnCast actions
+	target types: self, area
+
+*/
