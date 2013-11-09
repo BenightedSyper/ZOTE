@@ -18,10 +18,21 @@ public class CombatManager {
 		}
 	}
 	
-	public void Evaluate(GameObject _target, IList<Act> _acts){
+	public void Evaluate(Character _target, IList<Act> _acts){
 		//resolve an action
 		foreach(Act _act in _acts){
-			
+			EvaluateAct(_target, _act);
+		}
+	}
+	void EvaluateAct(Charcter _target, Act _act){
+		switch(_act.name){
+		case "AlterHullValue":
+			_target
+			break;
+		case "AlterShieldValue":
+			break;
+		default:
+			break;
 		}
 	}
 	/*
