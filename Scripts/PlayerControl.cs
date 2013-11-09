@@ -74,6 +74,24 @@ public class PlayerControl : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Tab)){
 			DisplayEquipment = !DisplayEquipment;
 		}
+		//1, 2, 3, 4, space, left shift, left mouse, right mouse
+		if(Input.GetKeyDown(KeyCode.1)){
+			
+		}
+		if(Input.GetKeyDown(KeyCode.2)){
+		}
+		if(Input.GetKeyDown(KeyCode.3)){
+		}
+		if(Input.GetKeyDown(KeyCode.4)){
+		}
+		if(Input.GetKeyDown(KeyCode.Space)){
+		}
+		if(Input.GetKeyDown(KeyCode.LeftShift)){
+		}
+		if(Input.GetMouseDown(0){//left mouse
+		}
+		if(Input.GetMouseDown(1){//right mouse
+		}
 		
 		inputVec.x = Input.GetAxisRaw("Horizontal");
 		inputVec.y = Input.GetAxisRaw("Vertical");
