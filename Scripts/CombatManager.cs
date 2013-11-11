@@ -96,5 +96,5 @@ public static Act TestingAct = new Act("Damage", new ArrayList(new[] {100, 333})
 player activates ability
 ability evaluates OnCast actions
 	target types: self, area
-
+action types conditional and nonconditional
 */
